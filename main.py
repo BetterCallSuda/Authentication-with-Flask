@@ -27,3 +27,18 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(String(100), unique=True)
     password: Mapped[str] = mapped_column(String(100))
     name: Mapped[str] = mapped_column(String(1000))
+
+
+with app.app_context():
+    db.create_all()
+
+
+@app.route('/')
+def home():
+    return render_template("index.html")
+
+
+@app.route('/register')
+def register():
+    return render_template("register.html")
+
