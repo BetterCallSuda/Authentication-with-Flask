@@ -44,7 +44,10 @@ def register():
         new_user = User(
             email=request.form.get('email'),
             name=request.form.get('name'),
-            password=request.form.get('password')
+
+            #Hashing the password to make it more authenticated!
+            password= generate_password_hash(request.form.get('password'), salt_length=8, method='pbkdf2:sha256')
+
         )
 
         db.session.add(new_user)
@@ -78,4 +81,3 @@ def download():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
